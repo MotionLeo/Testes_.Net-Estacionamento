@@ -5,19 +5,21 @@ namespace Alura.Estacionamento.Testes
 {
     public class VeiculoTestes
     {
-        [Fact]
+        [Fact(DisplayName = "Teste de aceleração")] //Displayname da um nome para o teste, não utilizando assim o nome do método
+        [Trait("Funcionalidade", "Acelerar")] //Trait da um nome para um grupo de teste e um nome para esse teste dentro do grupo
         public void TestaVeiculoAcelerar()
         {
             //Padrão AAA
             //Arrange - Preparação do cenário (instância do objeto, inicilizar variáveis)
             var veiculo = new Veiculo();
-            //Act - Literalmente o teste
+            //Act - O metódo/função que será testado
             veiculo.Acelerar(10);
             //Assert - Resultado obtido da execução do método de teste
             Assert.Equal(100, veiculo.VelocidadeAtual);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Teste de freio")]
+        [Trait("Funcionalidade", "Frear")]
         public void TestaVeiculoFrear()
         {
             //Arrange
@@ -44,8 +46,32 @@ namespace Alura.Estacionamento.Testes
             //Arrange
             var veiculo = new Veiculo();
             //Act
+            veiculo.Placa = "AAA-1234";
             //Assert
-            Assert.Equal("AAA-1234", veiculo.Placa);
+            Assert.NotNull(veiculo.Placa);
+        }
+
+        [Fact(DisplayName = "Teste skipado", Skip = "Teste ainda não implementado. Ignorar")] //Skip usado para ignorar o teste, não executando ele durante os testes
+        public void ValidaNomeProprietario()
+        {
+
+        }
+
+        [Fact]
+        public void DadosVeiculo()
+        {
+            //Arrange
+            var carro = new Veiculo();
+            carro.Proprietario = "Frederico";
+            carro.Cor = "Vermelho";
+            carro.Modelo = "Palio";
+            carro.Placa = "PQR-1472";
+
+            //Act
+            string dados = carro.ToString();
+
+            //Assert
+            Assert.Contains("Tipo do Veículo: Automóvel", dados);
         }
     }
 }
