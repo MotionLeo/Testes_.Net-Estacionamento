@@ -7,7 +7,7 @@ namespace Alura.Estacionamento.Testes
     {
         [Fact(DisplayName = "Teste de aceleração")] //Displayname da um nome para o teste, não utilizando assim o nome do método
         [Trait("Funcionalidade", "Acelerar")] //Trait da um nome para um grupo de teste e um nome para esse teste dentro do grupo
-        public void TestaVeiculoAcelerar()
+        public void TestaVeiculoAcelerarComParametro10()
         {
             //Padrão AAA
             //Arrange - Preparação do cenário (instância do objeto, inicilizar variáveis)
@@ -20,7 +20,7 @@ namespace Alura.Estacionamento.Testes
 
         [Fact(DisplayName = "Teste de freio")]
         [Trait("Funcionalidade", "Frear")]
-        public void TestaVeiculoFrear()
+        public void TestaVeiculoFrearComParametro10()
         {
             //Arrange
             var veiculo = new Veiculo();
@@ -58,11 +58,12 @@ namespace Alura.Estacionamento.Testes
         }
 
         [Fact]
-        public void DadosVeiculo()
+        public void FichaDeInformacaoDoVeiculo()
         {
             //Arrange
             var carro = new Veiculo();
             carro.Proprietario = "Frederico";
+            carro.Tipo = TipoVeiculo.Automovel;
             carro.Cor = "Vermelho";
             carro.Modelo = "Palio";
             carro.Placa = "PQR-1472";
@@ -71,7 +72,7 @@ namespace Alura.Estacionamento.Testes
             string dados = carro.ToString();
 
             //Assert
-            Assert.Contains("Tipo do Veículo: Automóvel", dados);
+            Assert.Contains("Ficha do Veículo:", dados);
         }
     }
 }
