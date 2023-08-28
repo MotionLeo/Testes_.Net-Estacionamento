@@ -35,7 +35,6 @@ namespace Alura.Estacionamento.Testes
         public void TestaVeiculoFrearComParametro10()
         {
             //Arrange
-            //var veiculo = new Veiculo();
             //Act
             veiculo.Frear(10);
             //Assert
@@ -46,7 +45,6 @@ namespace Alura.Estacionamento.Testes
         public void TestaTipoVeiculo()
         {
             //Arrange
-            //var veiculo = new Veiculo();
             //Act
             //Assert
             Assert.Equal(TipoVeiculo.Automovel, veiculo.Tipo);
@@ -56,7 +54,6 @@ namespace Alura.Estacionamento.Testes
         public void TestaPlacaVeiculo()
         {
             //Arrange
-            //var veiculo = new Veiculo();
             //Act
             veiculo.Placa = "AAA-1234";
             //Assert
@@ -73,7 +70,6 @@ namespace Alura.Estacionamento.Testes
         public void FichaDeInformacaoDoVeiculo()
         {
             //Arrange
-            //var veiculo = new Veiculo();
             veiculo.Proprietario = "Frederico";
             veiculo.Tipo = TipoVeiculo.Automovel;
             veiculo.Cor = "Vermelho";
@@ -87,6 +83,46 @@ namespace Alura.Estacionamento.Testes
             Assert.Contains("Ficha do Veículo:", dados);
         }
 
+        [Fact]
+        public void TestaNomeProprietarioVeiculoComMenosDeTresCaracteres()
+        {
+            //Arrange
+            string nomeProprietario = "Ab";
+
+            //Assert
+            Assert.Throws<System.FormatException>(
+                //Act
+                () => new Veiculo(nomeProprietario)
+            );
+
+        }
+
+        [Fact]
+        public void TestaMensagemDeExcecaoDoQuartoCaractereDaPlaca()
+        {
+            //Arrange
+            string placa = "ASDF8888";
+
+            //Act
+            var mensagem = Assert.Throws<System.FormatException>(
+                () => new Veiculo().Placa = placa
+                );
+
+            //Assert
+            Assert.Equal("O 4° caractere deve ser um hífen", mensagem.Message);
+        }
+
+        [Fact]
+        public void TestaUltimosCaracteresPlacaVeicuiloComoNumeros()
+        {
+            //Arrange
+            string placaFormatoErrado = "ABC-987S";
+
+            //Assert
+            Assert.Throws<FormatException>(
+                () => new Veiculo().Placa = placaFormatoErrado
+                );
+        }
         public void Dispose()
         {
             SaidaConsoleTeste.WriteLine("Dispose invocado");
